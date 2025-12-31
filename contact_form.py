@@ -4,9 +4,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = "https://inuberry.com/contact-us/"
+#URL = "https://www.zendesk.com/contact/"
 
 NAME = "John King"
-EMAIL = "john2020@gmail.com"
+EMAIL = "john2020@something.com"
 MESSAGE = "Hello, this is john"
 
 driver = webdriver.Chrome()
@@ -44,8 +45,11 @@ for field in all_fields:
     if not email_input and ("email" in combined or attrs["type"] == "email"):
         email_input = attrs["element"]
 
+    elif not message_input and field.tag_name.lower() == "textarea":
+        message_input = attrs["element"]
+
     elif not message_input and (
-        "message" in combined or "msg" in combined or "comment" in combined
+        "message" in combined or "msg" in combined or "comment" in combined or "feedback" in combined
     ):
         message_input = attrs["element"]
 
